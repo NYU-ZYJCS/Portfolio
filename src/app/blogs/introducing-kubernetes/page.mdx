@@ -1,0 +1,56 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import designSystem from './planetaria-design-system.png'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-06-04',
+  title: 'An Introduction to Kubernetes',
+  description:
+    'Kubernetes is an open-source platform designed to automate deploying, scaling, and operating application containers. Learn how Kubernetes can simplify your container orchestration.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Kubernetes is an open-source platform designed to automate deploying, scaling, and operating application containers. It groups containers that make up an application into logical units for easy management and discovery.
+
+<Image src={designSystem} alt="Kubernetes Design System" />
+
+I knew that to truly understand Kubernetes, I had to dive deep into its architecture, so I set up a local cluster and started experimenting with various components.
+
+## What is Kubernetes?
+
+Kubernetes, also known as K8s, was originally developed by Google and is now maintained by the Cloud Native Computing Foundation. It provides a framework to run distributed systems resiliently. It takes care of scaling and failover for your application, provides deployment patterns, and more.
+
+### Key Concepts
+
+1. **Cluster**: A set of nodes used to run containerized applications managed by Kubernetes.
+2. **Node**: A single machine in a Kubernetes cluster, which can be either a virtual or physical machine.
+3. **Pod**: The smallest and simplest Kubernetes object. A pod represents a single instance of a running process in your cluster.
+4. **Service**: An abstraction which defines a logical set of pods and a policy by which to access them.
+5. **Deployment**: Provides declarative updates to applications. It allows you to describe an application’s lifecycle, such as which images to use for the app, the number of pod replicas, and the update strategy.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80

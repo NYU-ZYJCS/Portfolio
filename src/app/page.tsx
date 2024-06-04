@@ -20,7 +20,7 @@ import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
-import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
+import { type ArticleWithSlug, getAllArticles } from '@/lib/blogs-articles'
 import { formatDate } from '@/lib/formatDate'
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -85,7 +85,7 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
     <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
+      <Card.Title href={`/blogs/${article.slug}`}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
