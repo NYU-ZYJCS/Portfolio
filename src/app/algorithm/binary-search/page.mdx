@@ -1,12 +1,11 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import designSystem from './planetaria-design-system.png'
 
 export const article = {
-  author: 'Adam Wathan',
-  date: '2022-09-05',
-  title: 'Crafting a design system for a multiplanetary future',
+  author: 'Yingjie Zhang',
+  date: '2024-06-07',
+  title: 'Understanding Binary Search',
   description:
-    'Most companies try to stay ahead of the curve when it comes to visual design, but for Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.',
+    'Binary search is an efficient algorithm for finding an item from a sorted list of items. Learn how binary search works and how to implement it in your code.',
 }
 
 export const metadata = {
@@ -16,75 +15,78 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-Most companies try to stay ahead of the curve when it comes to visual design, but for Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.
+Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item until you've narrowed down the possible locations to just one.
 
-<Image src={designSystem} alt="" />
 
-I knew that to get it right I was going to have to replicate the viewing conditions of someone from the future, so I grabbed my space helmet from the closet, created a new Figma document, and got to work.
+To get a better grasp of binary search, let's dive into its implementation and some of its variants.
 
-## Sermone fata
+## Binary Search Algorithm
+Binary search works on the principle of divide and conquer. Here is the basic implementation:
 
-Lorem markdownum, bracchia in redibam! Terque unda puppi nec, linguae posterior
-in utraque respicere candidus Mimasque formae; quae conantem cervice. Parcite
-variatus, redolentia adeunt. Tyrioque dies, naufraga sua adit partibus celanda
-torquere temptata, erit maneat et ramos, [iam](#) ait dominari
-potitus! Tibi litora matremque fumantia condi radicibus opusque.
+### Left-Colsed Right-Open Interval `[left, right)`
 
-Deus feram verumque, fecit, ira tamen, terras per alienae victum. Mutantur
-levitate quas ubi arcum ripas oculos abest. Adest [commissaque
-victae](#) in gemitus nectareis ire diva
-dotibus ora, et findi huic invenit; fatis? Fractaque dare superinposita
-nimiumque simulatoremque sanguine, at voce aestibus diu! Quid veterum hausit tu
-nil utinam paternos ima, commentaque.
+- The `left` pointer starts at 0, representing the first element of the array.
+- The `right` pointer ends at `nums.size()`, representing the position just after the last element of the array. 
+- Because this is an open interval, we use `nums.size()`. If we used `nums.size() - 1`, we wouldn't include the last element.
 
-```c
-exbibyte_wins = gigahertz(3);
-grayscaleUtilityClient = control_uat;
-pcmciaHibernate = oop_virus_console(text_mountain);
-if (stateWaisFirewire >= -2) {
-    jfs = 647065 / ldapVrml(tutorialRestore, 85);
-    metal_runtime_parse = roomComputingResolution - toolbarUpload +
-            ipx_nvram_open;
-} else {
-    maximizeSidebar *= suffix_url(flatbed + 2, requirements_encoding_node +
-            only_qbe_media, minicomputer);
+However, using `right` as `nums.size() - 1` can also work because the condition `left = mid + 1` will ensure that
+ the element at `nums.size() - 1`, which would normally be excluded, is included in the search.
+
+
+```cpp
+// Left-Closed Right-Open Interval [left, right)
+int binarySearch(vector<int>& nums, int target) {
+   int left = 0, right = nums.size();
+   while (left < right) {
+       int mid = left + (right - left) / 2;
+       if (nums[mid] == target) return mid;
+       else if (nums[mid] < target) left = mid + 1;
+       else right = mid;
+   }
+   return -1; // target not found
 }
 ```
 
-Aere repetiti cognataque natus. Habebat vela solutis saepe munus nondum adhuc
-oscula nomina pignora corpus deserat.
+### Left-Closed Right-Closed Interval `[left, right]`
 
-## Lethaei Pindumve me quae dinumerat Pavor
+- The `left` pointer starts at 0, representing the first element of the array.
+- The `right` pointer ends at `nums.size() - 1`, representing the position of the last element.
+- Because this is a closed interval, we use `nums.size() - 1`.
 
-Idem se saxa fata pollentibus geminos; quos pedibus. Est urnis Herses omnes nec
-divite: et ille illa furit sim verbis Cyllenius.
-
-1. Captus inpleverunt collo
-2. Nec nam placebant
-3. Siquos vulgus
-4. Dictis carissime fugae
-5. A tacitos nulla viginti
-
-Ungues fistula annoso, ille addit linoque motatque uberior verso
-[rubuerunt](#) confine desuetaque. _Sanguine_ anteit
-emerguntque expugnacior est pennas iniqui ecce **haeret** genus: peiora imagine
-fossas Cephisos formosa! Refugitque amata [refelli](#)
-supplex. Summa brevis vetuere tenebas, hostes vetantis, suppressit, arreptum
-regna. Postquam conpescit iuvenis habet corpus, et erratica, perdere, tot mota
-ars talis.
-
-```c
-digital.webcam_dual_frequency = webmasterMms;
-if (5 + language_standalone_google) {
-    cc_inbox_layout *= file_character;
-    task += p;
-    lockUnicode += enterprise_monochrome(tokenFunctionPersonal, keyVirtual,
-            adf);
+```cpp
+// Left-Closed Right-Closed Interval [left, right)
+int binarySearch(vector<int>& nums, int target) {
+   int left = 0, right = nums.size();
+   while (left <= right) {
+       int mid = left + (right - left) / 2;
+       if (nums[mid] == target) return mid;
+       else if (nums[mid] < target) left = mid + 1;
+       else right = mid;
+   }
+   return -1; // target not found
 }
-windows_binary_esports(87734, array(restoreRomTopology, adRaw(407314),
-        dongleBashThumbnail), interpreter);
 ```
 
-Sit volat naturam; motu Cancri. Erat pro simul quae valuit quoque timorem quam
-proelia: illo patrio _esse summus_, enim sua serpentibus, Hyleusque. Est coniuge
-recuso; refert Coroniden ignotos manat, adfectu.
+### Left-Open Right-Open Interval `(left, right)`
+
+- The `left` pointer starts at -1, representing the position just before the first element of the array.
+- The `right` pointer ends at `nums.size()`, representing the position just after the last element of the array.
+
+The reason for setting the `left` and `right` pointers one position beyond the array bounds is to ensure that 
+no elements are missed on either end. It's important to note that the while loop terminates when `left == right - 1`, 
+meaning the `left` and `right` pointers are adjacent. This approach requires careful control of the logic, 
+but you don't need to manually handle how to update the `left` and `right` pointers—using `mid` takes care of it.
+
+```cpp
+// Left-Open Right-Open Interval (left, right)
+int binarySearch(vector<int>& nums, int target) {
+   int left = -1, right = nums.size();
+   while (left < right - 1) {
+       int mid = left + (right - left) / 2;
+       if (nums[mid] == target) return mid;
+       else if (nums[mid] < target) left = mid;
+       else right = mid;
+   }
+   return -1; // target not found
+}
+```
