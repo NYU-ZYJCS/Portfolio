@@ -2,3 +2,11 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+html {
+  cursor: url("./dark.ico"), auto;
+}
+
+html.dark {
+  cursor: url("./light.ico"), auto;
+}

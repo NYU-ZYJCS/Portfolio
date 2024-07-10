@@ -1,0 +1,146 @@
+.pagination {
+  margin-top: 80px;
+}
+
+.paginationContainer {
+  display: flex;
+  color: #34343c;
+  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationItem {
+  margin-right: 8px;
+  padding: 0 .6rem;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  border-radius: .5rem;
+  border: 0;
+  background-color: inherit;
+  transition: all .3s;
+  height: 28px;
+  line-height: 28px;
+}
+
+.paginationItem:last-child {
+  margin-right: 0;
+}
+
+.paginationItem:hover {
+  cursor: pointer;
+  box-shadow: inset #e9ecef 0 0 0 1px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* .paginationItem:focus, .paginationItem:active {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 .15rem rgba(13, 110, 253, .25);
+} */
+
+.paginationItemActive {
+  background-color:  #f6f8fa;
+}
+
+.left {
+  margin-right: 8px;
+  transition: all .3s;
+  border-radius: .5rem;
+}
+
+.right {
+  transition: all .3s;
+  border-radius: .5rem;
+}
+
+.left:hover, .right:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.disable {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #ced4da;
+}
+
+.left_arrow, .right_arrow {
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  border-radius: .5rem;
+  border: 0;
+  transition: all .3s;
+  padding: 0 .4rem;
+  height: 28px;
+  line-height: 28px;
+}
+
+.left_arrow:hover, .right_arrow:hover {
+  cursor: pointer;
+  box-shadow: inset #e9ecef 0 0 0 1px;
+}
+
+/* .left_arrow:focus, .right_arrow:focus, .left_arrow:active, .right_arrow:active {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+} */
+
+.hidden {
+  display: none;
+}
+
+.arror_disable {
+  pointer-events: none;
+  user-select: none;
+  cursor: not-allowed !important;
+  color: #ced4da;
+  opacity: .3;
+}
+
+:global(.dark) .paginationContainer {
+  color: #eee;
+}
+
+:global(.dark) .paginationItem {
+  color: #eee;
+  background-color: #34343c;
+}
+
+:global(.dark) .paginationItem:hover {
+  cursor: pointer;
+  box-shadow: inset #a2a2ae 0 0 0 1px;
+}
+
+:global(.dark) .paginationItemActive {
+  background-color: #6b6b6f;
+}
+
+:global(.dark) .left, :global(.dark) .right {
+  color: #eee;
+}
+
+:global(.dark) .left:hover, :global(.dark) .right:hover {
+  cursor: pointer;
+  color: #a2a2ae;
+}
+
+:global(.dark) .disable {
+  color: #a2a2ae;
+}
+
+:global(.dark) .left_arrow, :global(.dark) .right_arrow {
+  color: #eee;
+}
+
+:global(.dark) .left_arrow:hover, :global(.dark) .right_arrow:hover {
+  cursor: pointer;
+  box-shadow: inset #a2a2ae 0 0 0 1px;
+}
+
+:global(.dark) .arror_disable {
+  color: #a2a2ae;
+}

@@ -4,6 +4,8 @@ import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/algorithm-articles'
 import { formatDate } from '@/lib/formatDate'
+import { ARTICLES_PER_PAGE } from '@/lib/constant'
+import Pagination from '@/components/Pagination'
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
@@ -41,8 +43,11 @@ export const metadata: Metadata = {
 }
 
 export default async function ArticlesIndex() {
-  let articles = await getAllArticles()
-
+  const allArticles = await getAllArticles()
+  console.log(allArticles.length)
+  const articles = allArticles.slice(0, ARTICLES_PER_PAGE)
+  const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE)
+  console.log(totalPages, '--')
   return (
     <SimpleLayout
       title="Writing on software design, company building, and the aerospace industry."
@@ -55,6 +60,7 @@ export default async function ArticlesIndex() {
           ))}
         </div>
       </div>
+      <Pagination totalPages={totalPages} path="/algorithm" page={1} />
     </SimpleLayout>
   )
 }

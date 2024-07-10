@@ -3,8 +3,9 @@ import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/blogs-articles'
 import { formatDate } from '@/lib/formatDate'
-import { ARTICLES_PER_PAGE } from '@/lib/constant'
 import Pagination from '@/components/Pagination'
+
+const ARTICLES_PER_PAGE = 5
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
@@ -41,10 +42,12 @@ export const metadata: Metadata = {
     'All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.',
 }
 
-export default async function ArticlesPage() {
+export default async function ArticlesPage({ params }: { params: { page: string } }) {
+
+  const page = parseInt(params.page, 10) || 1
   const allArticles = await getAllArticles()
-  const articles = allArticles.slice(0, ARTICLES_PER_PAGE)
   const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE)
+  const articles = allArticles.slice((page - 1) * ARTICLES_PER_PAGE, page * ARTICLES_PER_PAGE)
 
   return (
     <SimpleLayout
@@ -58,7 +61,7 @@ export default async function ArticlesPage() {
           ))}
         </div>
       </div>
-      <Pagination totalPages={totalPages} path="/blogs" page={1} />
+      <Pagination totalPages={totalPages} path="/blogs" page={page} />
     </SimpleLayout>
   )
 }
