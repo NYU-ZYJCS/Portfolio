@@ -1,0 +1,59 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import grpcImage from './grpc.png'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-07-09',
+  title: 'An Introduction to gRPC',
+  description:
+    'gRPC is a high-performance, open-source, universal RPC framework originally developed by Google. Learn how gRPC can help you build efficient, robust, and scalable APIs.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+gRPC is a high-performance, open-source, universal RPC framework originally developed by Google. It uses HTTP/2 for transport, Protocol Buffers as the interface description language, and provides features such as authentication, load balancing, and more.
+
+<Image src={grpcImage} alt="gRPC Architecture" />
+
+To truly understand gRPC, I delved into its core concepts and set up a basic gRPC service to experiment with different features and functionalities.
+
+## What is gRPC?
+
+gRPC, short for Google Remote Procedure Call, is designed to make it easier to connect services in and across data centers with pluggable support for load balancing, tracing, health checking, and authentication. It can efficiently connect services written in different languages.
+
+### Key Concepts
+
+1. **Service Definition**: A gRPC service is defined using Protocol Buffers, a powerful binary serialization toolset and language.
+2. **RPC (Remote Procedure Call)**: A method invoked on a remote server as if it were a local function call.
+3. **Client**: The entity that initiates the RPC calls. It uses a generated client stub to call methods on the remote server.
+4. **Server**: The entity that implements the service methods and responds to the client calls.
+5. **Channel**: A logical connection to a remote endpoint, which can multiplex multiple RPC calls.
+
+### gRPC Service Definition Example
+
+```
+syntax = "proto3";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+```

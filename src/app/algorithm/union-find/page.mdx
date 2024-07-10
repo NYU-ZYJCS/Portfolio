@@ -1,0 +1,105 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-07-05',
+  title: 'Understanding Union-Find',
+  description:
+    'Union-Find is a data structure that keeps track of a partition of a set into disjoint subsets. Learn how Union-Find works and how to implement it in your code.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Union-Find, also known as Disjoint Set Union (DSU), is a data structure that keeps track of a partition of a set into disjoint (non-overlapping) subsets. It provides near-constant-time operations to add new sets, merge existing sets, and find representatives of elements.
+
+## Union-Find Data Structure
+
+The Union-Find data structure supports two primary operations:
+
+1. **Find**: Determine which subset a particular element is in. This can be used for checking if two elements are in the same subset.
+2. **Union**: Join two subsets into a single subset.
+
+### Path Compression in Find
+
+In the `find` operation, we use path compression to flatten the structure of the tree whenever `find` is called. This helps in speeding up future operations. Here's how path compression works:
+
+```cpp
+int find(int x) {
+    if (parent[x] != x) {
+        parent[x] = find(parent[x]); // Path compression
+    }
+    return parent[x];
+}
+```
+By making each node point directly to the root, path compression ensures that the tree remains flat, which reduces the time complexity of future find operations.
+
+### Union by Rank
+In the union operation, we use the rank to keep the tree as flat as possible. The rank is an estimate of the tree's height. When we merge two sets, we attach the tree with the smaller rank under the root of the tree with the larger rank. Here's how union by rank works:
+
+```cpp
+void _union(int x, int y) {
+    int px = find(x), py = find(y);
+    if (px == py) return;
+
+    if (ranks[px] < ranks[py]) {
+        parent[px] = py;
+    } else if (ranks[px] > ranks[py]) {
+        parent[py] = px;
+    } else {
+        parent[py] = px;
+        ++ranks[px];
+    }
+}
+```
+
+By using both path compression and union by rank, we can achieve an amortized time
+complexity of O(α(n)), where α(n) is the inverse Ackermann function. In practice, 
+this is very close to O(1) for all practical purposes.
+
+
+
+## Implementation
+
+```cpp
+
+class UnionFind {
+private:
+    std::vector<int> parent;
+    std::vector<int> ranks;
+
+public:
+    // Initialize Union-Find structure
+    UnionFind(int n) {
+        ranks.resize(n, 1);
+        parent.resize(n);
+        std::iota(parent.begin(), parent.end(), 0);
+    }
+
+    // Find the root of x with path compression
+    int find(int x) {
+        if (parent[x] != x) {
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+
+    // Union two sets
+    void _union(int x, int y) {
+        int px = find(x), py = find(y);
+        if (px == py) return;
+
+        if (ranks[px] < ranks[py]) {
+            parent[px] = py;
+        } else if (ranks[px] > ranks[py]) {
+            parent[py] = px;
+        } else {
+            parent[py] = px;
+            ++ranks[px];
+        }
+    }
+};

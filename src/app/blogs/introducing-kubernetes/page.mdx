@@ -34,7 +34,7 @@ Kubernetes, also known as K8s, was originally developed by Google and is now mai
 4. **Service**: An abstraction which defines a logical set of pods and a policy by which to access them.
 5. **Deployment**: Provides declarative updates to applications. It allows you to describe an application’s lifecycle, such as which images to use for the app, the number of pod replicas, and the update strategy.
 
-```yaml
+```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,3 +54,4 @@ spec:
         image: nginx:1.14.2
         ports:
         - containerPort: 80
+```

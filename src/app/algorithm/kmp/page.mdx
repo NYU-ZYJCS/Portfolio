@@ -1,0 +1,57 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-07-05',
+  title: 'Understanding KMP Algorithm',
+  description:
+    'KMP (Knuth-Morris-Pratt) is a string-matching algorithm that searches for occurrences of a "needle" within a "haystack". Learn how KMP works and how to implement it in your code.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+KMP (Knuth-Morris-Pratt) is a string-matching algorithm that searches for occurrences of a "needle" (substring) within a "haystack" (main string). It uses preprocessing to achieve an efficient search.
+
+## KMP Algorithm
+
+The KMP algorithm consists of two main parts:
+
+1. **Preprocessing**: Create a partial match table (also known as "next" array) that stores the length of the longest proper prefix which is also a suffix.
+2. **Searching**: Use the partial match table to skip unnecessary comparisons during the search.
+
+### Preprocessing
+
+The preprocessing step builds the partial match table (`next` array) for the `needle`:
+
+```cpp
+#include <vector>
+#include <string>
+
+int kmpSearch(const std::string& haystack, const std::string& needle) {
+    int m = haystack.size(), n = needle.size();
+    if (n == 0) return 0;
+
+    std::vector<int> next(n);
+    for (int i = 1, j = 0; i < n; ++i) {
+        while (j > 0 && needle[i] != needle[j]) {
+            j = next[j - 1];
+        }
+        if (needle[i] == needle[j]) ++j;
+        next[i] = j;
+    }
+
+    for (int i = 0, j = 0; i < m; ++i) {
+        while (j > 0 && haystack[i] != needle[j]) {
+            j = next[j - 1];
+        }
+        if (haystack[i] == needle[j]) ++j;
+        if (j == n) return i - (n - 1);
+    }
+    return -1;
+}
+``` 
