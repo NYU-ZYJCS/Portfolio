@@ -1,0 +1,113 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-08-09',
+  title: 'Understanding Difference Arrays',
+  description:
+    'Difference arrays are a powerful tool for efficiently performing range update operations. Learn how difference arrays work, how to implement them, and their applications.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+# Introduction to Difference Arrays
+
+A difference array is a powerful tool used to efficiently handle multiple range update operations on an array. It allows you to perform range updates in constant time and then apply these updates to the original array in linear time. This can be particularly useful in scenarios where you need to apply multiple operations to ranges within an array.
+
+## How Difference Arrays Work
+
+Consider an array `A` of length `n`. The difference array `D` for `A` is defined as follows:
+
+- `D[0] = A[0]`
+- `D[i] = A[i] - A[i-1]` for `i > 0`
+
+Given the difference array `D`, the original array `A` can be reconstructed by computing the prefix sum of `D`:
+
+- `A[0] = D[0]`
+- `A[i] = D[i] + A[i-1]` for `i > 0`
+
+### Example
+
+Let's consider an array `A = [2, 3, 5, 7, 11]`. The corresponding difference array `D` would be:
+
+- `D = [2, 1, 2, 2, 4]`
+
+To perform a range update, such as adding `3` to the elements from index `1` to index `3`, you would update the difference array as follows:
+
+- `D[1] += 3` (adds 3 to the range start)
+- `D[4] -= 3` (subtracts 3 from the position just after the range end)
+
+After applying these updates, the difference array `D` becomes:
+
+- `D = [2, 4, 2, 2, 1]`
+
+To reconstruct the updated array `A`, calculate the prefix sums of `D`:
+
+- `A = [2, 6, 8, 10, 11]`
+
+## Implementation of Difference Array in Code
+
+Here’s a basic implementation of the difference array in C++:
+
+```cpp
+#include <vector>
+
+// Initialize difference array
+std::vector<int> initializeDifferenceArray(const std::vector<int>& A) {
+    std::vector<int> D(A.size());
+    D[0] = A[0];
+    for (size_t i = 1; i < A.size(); ++i) {
+        D[i] = A[i] - A[i - 1];
+    }
+    return D;
+}
+
+// Apply a range update
+void updateRange(std::vector<int>& D, int l, int r, int val) {
+    D[l] += val;
+    if (r + 1 < D.size()) {
+        D[r + 1] -= val;
+    }
+}
+
+// Reconstruct the original array after all updates
+std::vector<int> getUpdatedArray(const std::vector<int>& D) {
+    std::vector<int> A(D.size());
+    A[0] = D[0];
+    for (size_t i = 1; i < D.size(); ++i) {
+        A[i] = A[i - 1] + D[i];
+    }
+    return A;
+}
+```
+
+## Example Usage
+
+```cpp
+std::vector<int> A = {2, 3, 5, 7, 11};
+std::vector<int> D = initializeDifferenceArray(A);
+
+// Perform range update: Add 3 to the range [1, 3]
+updateRange(D, 1, 3, 3);
+
+// Get the updated array
+std::vector<int> updatedA = getUpdatedArray(D);
+// updatedA should be {2, 6, 8, 10, 11}
+```
+
+## Applications of Difference Arrays
+
+Difference arrays are particularly useful in scenarios involving multiple range updates, such as:
+
+- **Incrementing or decrementing a subarray**: When you need to add or subtract a value from all elements within a specific range.
+- **Interval coverage**: Keeping track of how many times each element in a range has been updated.
+- **Prefix sum queries**: Efficiently computing prefix sums after multiple updates.
+
+## Conclusion
+
+Difference arrays offer an efficient way to handle range updates, especially when dealing with large arrays or multiple operations. By understanding and implementing difference arrays, you can significantly optimize the performance of your algorithms that involve range updates.

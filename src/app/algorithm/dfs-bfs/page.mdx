@@ -1,0 +1,110 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-08-09',
+  title: 'DFS vs BFS: Understanding the Differences',
+  description:
+    'Depth-First Search (DFS) and Breadth-First Search (BFS) are two fundamental graph traversal algorithms. Learn how they work, their differences, and when to use each one.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+## Introduction to DFS and BFS
+
+Depth-First Search (DFS) and Breadth-First Search (BFS) are two fundamental algorithms used for traversing or searching tree or graph data structures. Both algorithms can be used to solve a variety of problems, but they do so in different ways, which makes each one more suitable for certain types of problems.
+
+### Depth-First Search (DFS)
+
+DFS is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along each branch before backtracking.
+
+### DFS Implementation (Recursive)
+
+```cpp
+void DFSRecursive(int node, vector<vector<int>>& graph, vector<bool>& visited) {
+    visited[node] = true;
+    // Process the node (e.g., print it)
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            DFSRecursive(neighbor, graph, visited);
+        }
+    }
+}
+```
+
+### DFS Implementation (Iterative)
+
+```cpp
+void DFSIterative(int startNode, vector<vector<int>>& graph) {
+    stack<int> s;
+    vector<bool> visited(graph.size(), false);
+    s.push(startNode);
+    while (!s.empty()) {
+        int node = s.top();
+        s.pop();
+        if (!visited[node]) {
+            visited[node] = true;
+            // Process the node (e.g., print it)
+            for (int neighbor : graph[node]) {
+                if (!visited[neighbor]) {
+                    s.push(neighbor);
+                }
+            }
+        }
+    }
+}
+```
+
+### DFS Characteristics
+- **Space Complexity**: DFS has a space complexity of O(V) in the worst case, where V is the number of vertices in the graph.
+- **Application**: Useful in scenarios where you need to explore all possible paths (e.g., solving mazes, puzzles, etc.).
+- **Traversal Order**: DFS goes deep into the graph/tree before visiting the next sibling.
+
+
+## Breadth-First Search (BFS)
+BFS is another algorithm for traversing or searching tree or graph data structures. 
+It starts at the tree root (or an arbitrary node in a graph) and explores the neighbor nodes at 
+the present depth prior to moving on to nodes at the next depth level.
+
+### BFS Implementation
+
+```cpp
+void BFS(int startNode, vector<vector<int>>& graph) {
+    queue<int> q;
+    vector<bool> visited(graph.size(), false);
+    q.push(startNode);
+    visited[startNode] = true;
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        // Process the node (e.g., print it)
+        for (int neighbor : graph[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+```
+
+### BFS Characteristics
+
+- **Space Complexity**: BFS has a space complexity of O(V) in the worst case, where V is the number of vertices in the graph.
+- **Application**: Useful in scenarios where you need to find the shortest path between two nodes.
+- **Traversal Order**: BFS visits all nodes at the current depth level before moving on to the next level.
+
+### Differences Between DFS and BFS
+
+- **Traversal Order**: DFS dives deep into the graph/tree, exploring as far as possible along one branch before backtracking. BFS, on the other hand, explores all nodes at the current level before moving on to the next level.
+- **Space Complexity**: DFS typically uses less memory when implemented recursively, but can have similar space complexity to BFS when using the iterative approach with a stack. BFS uses a queue, which may grow large in size if the graph/tree is wide.
+
+### Use Cases:
+
+- **DFS** is more suitable for scenarios where you need to explore all possible paths (e.g., finding connected components, solving puzzles like mazes).
+- **BFS** is ideal for finding the shortest path in unweighted graphs, or for exploring nodes layer by layer (e.g., finding the minimum number of moves in a game).

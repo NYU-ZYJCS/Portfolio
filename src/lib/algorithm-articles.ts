@@ -32,7 +32,6 @@ export async function getAllArticles() {
 
   let articles = await Promise.all(articleFilenames.map(importArticle))
 
-  // 去掉注释就好了，最后一行删掉
-  // return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
-  return [...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))]
+  return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
+  // return [...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)) ,...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date)), ...articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))]
 }

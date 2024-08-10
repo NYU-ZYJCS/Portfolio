@@ -1,1 +1,1 @@
-export const ARTICLES_PER_PAGE = 5
+export const ARTICLES_PER_PAGE = 4

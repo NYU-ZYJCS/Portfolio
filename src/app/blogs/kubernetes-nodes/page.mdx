@@ -1,0 +1,46 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-07-25',
+  title: 'Kubernetes Worker Nodes',
+  description:
+    'Kubernetes worker nodes are the machines that run containerized applications in a Kubernetes cluster. Learn how worker nodes interact with the control plane to manage workloads.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+# Introduction to Kubernetes Worker Nodes
+
+Learn about Kubernetes worker nodes, how they function, and their role in a Kubernetes cluster. Looking for documentation on how to manage and scale worker nodes? There are various tools and libraries available to help you manage Kubernetes clusters across different environments. For an in-depth learning experience with practical tutorials, see the available training courses.
+
+Kubernetes worker nodes are the machines that run containerized applications in a Kubernetes cluster. Each worker node contains the necessary services to manage networking between containers, communicate with the Kubernetes control plane, and execute workloads as instructed.
+
+## Key Components of a Kubernetes Worker Node
+
+### Kubelet
+The kubelet is an agent that runs on each worker node in the cluster. It ensures that containers are running in a pod as expected by communicating with the Kubernetes API server. The kubelet watches for tasks sent from the API server and executes them.
+
+### Container Runtime
+The container runtime on a worker node is responsible for running containers. Docker is one of the most commonly used container runtimes, but Kubernetes also supports other runtimes like containerd and CRI-O. The runtime pulls the container images from a registry, unpacks them, and runs the containers.
+
+### Kube-proxy
+Kube-proxy is a network proxy that runs on each worker node. It maintains network rules on the nodes, allowing network communication to your pods from network sessions inside or outside of the cluster. It plays a crucial role in Kubernetes networking.
+
+## Example of Worker Node Interaction with Control Plane
+
+After the Kubernetes control plane schedules a pod to run on a worker node, the following process typically occurs:
+
+1. **Scheduling**: The control plane decides which worker node should run the pod based on available resources and scheduling policies.
+2. **Kubelet Execution**: The kubelet on the selected worker node receives the instruction to run the pod, retrieves the container images, and starts the containers.
+3. **Container Runtime**: The container runtime handles the actual operation of the containers, ensuring they are running as specified.
+4. **Networking via Kube-proxy**: Kube-proxy manages the networking aspects, ensuring that the containers can communicate with other pods and services inside and outside the cluster.
+
+For example, after a pod is successfully running on a worker node, you can interact with it using the Kubernetes API, such as retrieving logs, checking the pod status, or scaling the deployment. The worker node executes these tasks and interacts with the control plane to maintain the desired state.
+
+This ensures that your applications run consistently across all worker nodes in your Kubernetes cluster.

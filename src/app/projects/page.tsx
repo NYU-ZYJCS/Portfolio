@@ -4,46 +4,45 @@ import Image from 'next/image'
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import logoRollup from '@/images/logos/rollup.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import logoYJ from '@/images/logos/yj.svg'
+import logoParkinson from '@/images/logos/parkinson.svg'
+import logoRpc from '@/images/logos/yz-rpc.svg'
+import logoFlipClock from '@/images/logos/flip-clock.svg'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'Flip Clock',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+      'A versatile desktop utility designed to enhance productivity and provide essential information at a glance.',
+    link: { href: 'https://github.com/NYU-ZYJCS/Flip-Clock', label: 'Flip-Clock' },
+    logo: logoFlipClock,
   },
   {
     name: 'Eazy Watermark',
     description:
       'Component library for making full screen watermarking with rollup.',
-    link: { href: '#', label: 'https://jobsofferings.github.io/eazy-watermark' },
+    link: { href: 'https://jobsofferings.github.io/eazy-watermark', label: 'Eazy-Watermark' },
     logo: logoRollup,
   },
   {
-    name: 'HelioStream',
-    description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
+    name: 'Parkinson Detection',
+    description: 'A wearable device using STM32F429 to detect and assess Parkinsonian tremors via gyroscope measurements.',
+    link: { href: 'https://github.com/NYU-ZYJCS/Parkinson-Embeded', label: 'Parkinson' },
+    logo: logoParkinson,
   },
   {
-    name: 'cosmOS',
-    description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
+    name: 'Portfolio',
+    description: 'A showcase of my projects and skills in software development.',
+    link: { href: 'https://github.com/NYU-ZYJCS/Portfolio', label: 'Portfolio' },
+    logo: logoYJ,
+
   },
   {
-    name: 'OpenShuttle',
+    name: 'yz-rpc',
     description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'A lightweight RPC framework designed for high efficiency and simplicity.',
+    link: { href: '#', label: 'In Development' },
+    logo: logoRpc,
   },
 ]
 
@@ -60,14 +59,14 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+  description: 'Interest-Driven, Step-by-Step Exploration.',
 }
 
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      title="Interest-Driven, Step-by-Step Exploration."
+      intro="These projects are the result of my curiosity and ongoing exploration. Many are open-source, so if something interests you, take a look at the code and feel free to contribute."
     >
       <ul
         role="list"

@@ -1,0 +1,62 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Yingjie Zhang',
+  date: '2024-07-14',
+  title: 'An Introduction to Docker',
+  description:
+    'Docker is a platform designed to simplify the process of developing, shipping, and running applications by using containerization technology. Learn how Docker can help you build, share, and run modern applications efficiently.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Introduction to Docker
+Learn about Docker, how it works, and how to use it. Looking for documentation on how to build and run Docker containers? There are numerous resources available to help you get started with Docker in various programming languages and environments. For an in-depth learning experience with practical tutorials, see the available training courses.
+
+Docker is a platform that uses OS-level virtualization to deliver software in packages called containers. Containers are lightweight and portable, making it easier to build, share, and run applications in various environments consistently.
+
+A Docker container image is a lightweight, standalone, and executable package that includes everything needed to run a piece of software: code, runtime, system tools, system libraries, and settings. For example, to create a simple Docker container that runs a web server, you might define a Dockerfile like this:
+
+```Dockerfile
+# Use an official Node.js runtime as a parent image
+FROM node:14
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the package.json and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the application code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Command to run the application
+CMD [ "node", "app.js" ]
+```
+
+After building the Docker image with the above Dockerfile, you can run the container with a simple command:
+
+```bash
+docker build -t my-node-app .
+docker run -p 8080:8080 my-node-app
+```
+
+Once the Docker container is running (typically on a port of your choosing), 
+it can serve your application consistently across different environments. 
+The container includes everything the application needs to run, 
+ensuring that it behaves the same whether it's on your local machine, in testing, or in production.
+
+For example, after running the container, you could access the application via:
+
+```bash
+curl http://localhost:8080
+```

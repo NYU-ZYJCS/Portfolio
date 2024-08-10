@@ -5,7 +5,7 @@ import { type ArticleWithSlug, getAllArticles } from '@/lib/blogs-articles'
 import { formatDate } from '@/lib/formatDate'
 import Pagination from '@/components/Pagination'
 
-const ARTICLES_PER_PAGE = 5
+const ARTICLES_PER_PAGE = 4
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
@@ -47,6 +47,7 @@ export default async function ArticlesPage({ params }: { params: { page: string 
   const page = parseInt(params.page, 10) || 1
   const allArticles = await getAllArticles()
   const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE)
+  
   const articles = allArticles.slice((page - 1) * ARTICLES_PER_PAGE, page * ARTICLES_PER_PAGE)
 
   return (
